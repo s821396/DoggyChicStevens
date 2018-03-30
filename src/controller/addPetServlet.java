@@ -32,12 +32,12 @@ public class addPetServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		PetHelper ph = new PetHelper();
-		String act = request.getParameter("doThisToPet");
+		String act = request.getParameter("doThisToItem");
 		System.out.println("act = " + act);
 		if(act == null) {
 			getServletContext().getRequestDispatcher("/addPet.html").forward(request, response);
 		} else if (act.equals("Add Pet")) {
-			String name = request.getParameter("petName");
+			String name = request.getParameter("name");
 			double weight = Double.valueOf(request.getParameter("weight"));
 			String shots = request.getParameter("vacination");
 		

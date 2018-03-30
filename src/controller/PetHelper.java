@@ -66,7 +66,7 @@ EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("DoggyCh
 	public List<Pet> searchForPetByCustomer(Customer c) {
 		EntityManager em = emfactory.createEntityManager();
 		TypedQuery<Pet> allResults = em.createQuery("select p from Pet p INNER JOIN Customer c where p.customer = c and c.id = :selectedCustomerId", Pet.class);
-		allResults.setParameter("selectedCustomerId", c.getCustomterID());
+		allResults.setParameter("selectedCustomerId", c.getId());
 		List<Pet> allPets = allResults.getResultList();
 		em.close();
 		return allPets;
@@ -79,7 +79,7 @@ EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("DoggyCh
 	public Pet searchForPetByAppointment(Appointment appointment) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
-		TypedQuery<Pet> result = em.createQuery("select p from Pet p INNER JOIN Appointment a where a.pet = p and a.id = :selectedAppointmentId", Pet.class);
+		TypedQuery<Pet> result = em.createQuery("select p from Pet p INNER JOIN Appointment a where a.pet = p and a.appointment_id = :selectedAppointmentId", Pet.class);
 		result.setParameter("selectedAppointmentId", appointment.getAppointment_id());
 		Pet pet = result.getSingleResult();
 		em.close();

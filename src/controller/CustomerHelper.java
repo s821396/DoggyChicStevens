@@ -29,7 +29,7 @@ EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("DoggyCh
 		
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		Customer find = em.find(Customer.class, toDelete.getCustomterID());
+		Customer find = em.find(Customer.class, toDelete.getId());
 		em.remove(find);
 		em.getTransaction().commit();
 		em.close();
@@ -57,8 +57,9 @@ EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("DoggyCh
 	
 	public List<Customer> searchForCustomerByName(String lastName) {
 		// TODO Auto-generated method stub
+		System.out.println("CustomerHelper LastName = " + lastName);
 		EntityManager em = emfactory.createEntityManager();
-		TypedQuery<Customer> typedQuery = em.createQuery("select cust from Customer cust where cust.customerLastName = :selectedLastName", Customer.class);
+		TypedQuery<Customer> typedQuery = em.createQuery("select cust from Customer cust where cust.lastName = :selectedLastName", Customer.class);
 		typedQuery.setParameter("selectedLastName", lastName);
 		List<Customer> allCustomers = typedQuery.getResultList();
 		em.close();
@@ -80,8 +81,8 @@ EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("DoggyCh
 	public Customer searchForCustomerByPet(Pet pet) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
-		TypedQuery<Customer> result = em.createQuery("select c from Customer c INNER JOIN Pet p where p.customer = c and p.id = :selectedPetId", Customer.class);
-		result.setParameter("selectedPetId", pet.getPetID());
+		TypedQuery<Customer> result = em.createQuery("select c from Customer c INNER JOIN Pet p where p.customer = c and p = :selectedPetId", Customer.class);
+		result.setParameter("selectedPetId", pet);
 		Customer customer = result.getSingleResult();
 		em.close();
 		return customer;

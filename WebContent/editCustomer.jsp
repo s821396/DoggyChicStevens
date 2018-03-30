@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +12,7 @@
 	<form action = "editAppointmentServlet" method = "post">
 	Name: <input type = "text" name = "firstName" value = "${customerToEdit.firstName}">
 		<input type = "text" name = "lastName" value = "${customerToEdit.lastName}"><br/>
-	Street Address: <input type = "text" name = "address" value = "${customerToEdit.address}"><br/>
+	Street Address: <input type = "text" name = "address" value = "${customerToEdit.streetAddress}"><br/>
 	City: <input type = "text" name = "city" value = "${customerToEdit.city}"><br/>
 	State: <select name = "state">
 				<option value="" selected disabled hidden>State</option>

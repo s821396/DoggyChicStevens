@@ -53,8 +53,8 @@ EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("DoggyCh
 	public Services searchForServiceByAppointment(Appointment appointment) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
-		TypedQuery<Services> result = em.createQuery("select s from Services s INNER JOIN Appointment a where a.services = s and a.id = :selectedAppointmentId", Services.class);
-		result.setParameter("selectedAppointmentId", appointment.getAppointment_id());
+		TypedQuery<Services> result = em.createQuery("select s from Services s INNER JOIN Appointment a where a.services = s and a = :selectedAppointmentId", Services.class);
+		result.setParameter("selectedAppointmentId", appointment);
 		Services service = result.getSingleResult();
 		em.close();
 		return service;

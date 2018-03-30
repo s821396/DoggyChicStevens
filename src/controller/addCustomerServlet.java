@@ -44,14 +44,17 @@ public class addCustomerServlet extends HttpServlet {
 		CustomerHelper ch = new CustomerHelper();
 		PetHelper ph = new PetHelper();
 		
-		String act = request.getParameter("doThisToCustomer");
+		String act = request.getParameter("doThisToItem");
+		System.out.println("Act in Add Customer Servlet = " + act );
 		if(act == null) {
 			getServletContext().getRequestDispatcher("/findCustomer.html").forward(request, response);
 		} else if (act.equals("Select Customer")) {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
+			System.out.println("Id in addCustomerServlet " + tempId);
 			Customer c = ch.searchForCustomerById(tempId);
 			getServletContext().setAttribute("customer", c);
 			List<Pet> pets = ph.searchForPetByCustomer(c);
+			System.out.println(" Pets in add customer servlet " + pets);
 			request.setAttribute("matchingPets", pets);
 			if(pets.isEmpty()) {
 				request.setAttribute("matchingPets", " ");
@@ -62,8 +65,8 @@ public class addCustomerServlet extends HttpServlet {
 			
 		} else if (act.equals("Submit")) {
 			
-			String firstName = request.getParameter("customerFirstName");
-			String lastName = request.getParameter("customerLastName");
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
 			String address = request.getParameter("streetAddress");
 			String city = request.getParameter("city");
 			String state = request.getParameter("state"); 
@@ -77,7 +80,7 @@ public class addCustomerServlet extends HttpServlet {
 			
 			getServletContext().getRequestDispatcher("/addPet.html").forward(request, response);
 		}else if (act.equals("Select Pet")) {
-				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Integer tempId = Integer.parseInt(request.getParameter("petID"));
 				Pet p = ph.searchForPetById(tempId);
 				getServletContext().setAttribute("pet", p);
 				getServletContext().getRequestDispatcher("/makeAppointment.html").forward(request, response);

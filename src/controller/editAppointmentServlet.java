@@ -52,7 +52,7 @@ public class editAppointmentServlet extends HttpServlet {
 		if (act == null) {
 			getServletContext().getRequestDispatcher("/viewAppointmentServlet").forward(request, response);
 		} else if (act.equals("Edit Customer Info")) {
-			Integer tempId = Integer.parseInt(request.getParameter("custId"));
+			Integer tempId = Integer.parseInt(request.getParameter("custID"));
 			Customer customerToEdit = ch.searchForCustomerById(tempId);
 			request.setAttribute("customerToEdit", customerToEdit);
 			
@@ -64,7 +64,8 @@ public class editAppointmentServlet extends HttpServlet {
 			
 			getServletContext().getRequestDispatcher("/editPet.jsp").forward(request, response);
 		} else if (act.equals("Edit Appointment")) {
-			Integer tempId = Integer.parseInt(request.getParameter("apptId"));
+			Integer tempId = Integer.parseInt(request.getParameter("appointment_id"));
+			System.out.println("appointment id in edit appointment servlet " + tempId);
 			Appointment appointmentToEdit = ah.searchForAppointmentById(tempId);
 			request.setAttribute("appointmentToEdit", appointmentToEdit);
 			
@@ -80,8 +81,8 @@ public class editAppointmentServlet extends HttpServlet {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
 			
 			Customer customerToUpdate = ch.searchForCustomerById(tempId);
-			customerToUpdate.setCustomerFirstName(firstName);
-			customerToUpdate.setCustomerLastName(lastName);
+			customerToUpdate.setFirstName(firstName);
+			customerToUpdate.setLastName(lastName);
 			customerToUpdate.setStreetAddress(address);
 			customerToUpdate.setCity(city);
 			customerToUpdate.setState(state);
@@ -101,7 +102,7 @@ public class editAppointmentServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("/viewAppointment.jsp").forward(request, response);
 		} else if (act.equals("Save Pet Information")) {
-			String petName = request.getParameter("petName");
+			String name = request.getParameter("name");
 			Double weight = Double.parseDouble(request.getParameter("weight"));
 			String shots = request.getParameter("shots");
 			char hasShots = 0;
@@ -113,7 +114,7 @@ public class editAppointmentServlet extends HttpServlet {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
 			
 			Pet petToUpdate = ph.searchForPetById(tempId);
-			petToUpdate.setName(petName);
+			petToUpdate.setName(name);
 			petToUpdate.setWeight(weight);
 			petToUpdate.setHasShots(hasShots);
 			

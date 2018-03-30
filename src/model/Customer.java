@@ -12,12 +12,11 @@ import javax.persistence.Table;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int customterID;
+	private int id;
 	@Column(name="f_name")
-	private String customerFirstName;
+	private String firstName;
 	@Column(name="l_name")
-	private String customerLastName;
+	private String lastName;
 	@Column(name="street_add")
 	private String streetAddress;
 	private String city;
@@ -33,44 +32,58 @@ public class Customer {
 	}
 	
 	
-	public Customer(int customterID) {
+	public Customer(int id) {
 		super();
-		this.customterID = customterID;
+		this.id = id;
 	}
 
 
-	public Customer(String customerFirstName, String customerLastName, String streetAddress, String city, String state,
+	public Customer(String firstName, String lastName, String streetAddress, String city, String state,
 			String zip, String phoneNumber) {
 		super();
-		this.customerFirstName = customerFirstName;
-		this.customerLastName = customerLastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.streetAddress = streetAddress;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
+		
 	}
 
 	
-	public int getCustomterID() {
-		return customterID;
+	public int getId() {
+		return id;
 	}
 
 
-	public void setCustomerFirstName(String customerFirstName) {
-		this.customerFirstName = customerFirstName;
+	public String getFirstName() {
+		return firstName;
 	}
 
 
-	public String getCustomerLastName() {
-		return customerLastName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 
-	public void setCustomerLastName(String customerLastName) {
-		this.customerLastName = customerLastName;
+	public String getLastName() {
+		return lastName;
 	}
 
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
 	public String getStreetAddress() {
 		return streetAddress;
@@ -112,25 +125,16 @@ public class Customer {
 	}
 
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 
 	public String printDetail() {
-		return "******** " + "Customer Information: ********" + "\nCustomerId: " + customterID + "\nCustomer Name: " + customerFirstName +  " " + customerLastName + "\nPhone Number: "
+		return "******** " + "Customer Information: ********" + "\nCustomerId: " + id + "\nCustomer Name: " + firstName +  " " + lastName + "\nPhone Number: "
 				+ phoneNumber + "\nCustomer Address: " + streetAddress + "," + state + "  " + zip;
 	}
 		
 	@Override
 	public String toString() {
-		return "Customer [customterID=" + customterID + ", customerFirstName=" + customerFirstName
-				+ ", customerLastName=" + customerLastName + ", streetAddress=" + streetAddress + ", city=" + city
+		return "Customer [customterID=" + id + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", streetAddress=" + streetAddress + ", city=" + city
 				+ ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + "]";
 	}
 }

@@ -8,6 +8,8 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import model.Appointment;
+import model.Customer;
+import model.Pet;
 
 
 
@@ -62,12 +64,18 @@ EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("DoggyCh
 		em.close();
 		
 	}
-	public List<Appointment> searchForAppointmentByCustomerAndPet(String lastName, String petName) {
+	public List<Appointment> searchForAppointmentByCustomerAndPet(String lastName, String name) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
-	    TypedQuery<Appointment> allResults = em.createQuery("select a from Appointment a INNER JOIN Pet p, Customer c where a.pet = p and p.name = :selectedPet and p.customer = c and c.customerLastName = :selectedCustomerName", Appointment.class);
-		allResults.setParameter("selectedPet", petName);
-		allResults.setParameter("selectedCustomerName", lastName);
+		CustomerHelper ch = new CustomerHelper();
+		List<Customer> toFind = ch.searchForCustomerByName(lastName);
+		
+		PetHelper ph = new PetHelper();
+		List<Pet> petList = ph.searchForPetByCustomer(toFind.get(0));
+		
+	    TypedQuery<Appointment> allResults = em.createQuery("select a from Appointment a INNER JOIN Pet p, Customer c where a.pet = p and p = :selectedPet and p.customer = c and c = :selectedCustomerName", Appointment.class);
+		allResults.setParameter("selectedPet", petList.get(0));
+		allResults.setParameter("selectedCustomerName", toFind.get(0));
 		List<Appointment> allAppointments = allResults.getResultList();
 		em.close();
 		return allAppointments;

@@ -40,10 +40,12 @@ public class findCustomerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String lastName = request.getParameter("lastName");
+		System.out.println("lastName in findCustomerServlet = " + lastName);
 		CustomerHelper ch = new CustomerHelper();
 		List<Customer> list = ch.searchForCustomerByName(lastName);
 		request.setAttribute("matchingCustomers", list);
 		if(list.isEmpty()) {
+			System.out.println("In empty");
 			request.setAttribute("matchingCustomers", " ");
 		}
 		getServletContext().getRequestDispatcher("/findCustomer.jsp").forward(request, response);

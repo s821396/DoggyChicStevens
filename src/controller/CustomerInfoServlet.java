@@ -36,6 +36,7 @@ public class CustomerInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String act = request.getParameter("doThisToCustomer");
+		System.out.println("act in customerInfo Servlet" + act);
 		if(act == null) {
 				//no button has been selected
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);

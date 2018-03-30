@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,9 +14,9 @@
 	<table>
 	<c:forEach items = "${requestScope.matchingAppointments}" var = "currentappointment">
 	<tr>
-		<td><input type="radio" name="id" value="${currentappointment.id}"></td>
+		<td><input type="radio" name="appointment_id" value="${currentappointment.appointment_id}"></td>
 		<td>${currentappointment.customer.lastName}</td>
-		<td>${currentappointment.pet.petName}</td>
+		<td>${currentappointment.pet.name}</td>
 		<td>${currentappointment.appointmentDate}</td>
 	</tr>
 	</c:forEach>

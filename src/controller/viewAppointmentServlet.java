@@ -53,9 +53,10 @@ public class viewAppointmentServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/viewAppointment.html").forward(request, response);
 		} else if (act.equals("Submit")) {
 			String lastName = request.getParameter("lastName");
-			String petName = request.getParameter("petName");
+			String name = request.getParameter("name");
 
-			List<Appointment> appts = ah.searchForAppointmentByCustomerAndPet(lastName, petName);
+			List<Appointment> appts = ah.searchForAppointmentByCustomerAndPet(lastName, name);
+			
 			request.setAttribute("matchingAppointments", appts);
 			if(appts.isEmpty()) {
 				request.setAttribute("matchingAppointments", " ");
@@ -64,11 +65,21 @@ public class viewAppointmentServlet extends HttpServlet {
 		} else if (act.equals("Back to Menu")) {
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		} else if (act.equals("Select Appointment")) {
-			Integer tempId = Integer.parseInt(request.getParameter("id"));
+			Integer tempId = Integer.parseInt(request.getParameter("appointment_id"));
+			
+			System.out.println("Appointment ID Value: " + tempId);
+			
 			Appointment appointment = ah.searchForAppointmentById(tempId);
+			System.out.println("Appointment: " + appointment.toString());
+			
 			Pet pet = ph.searchForPetByAppointment(appointment);
+			System.out.println("Pet:" + pet.toString());
+			
 			Services service = sh.searchForServiceByAppointment(appointment);
+			System.out.println("Service: " + service.toString());
+			
 			Customer customer = ch.searchForCustomerByPet(pet);
+			System.out.println("Customer" + customer.toString());
 			
 			getServletContext().setAttribute("selectedAppointment", appointment);
 			getServletContext().setAttribute("selectedPet", pet);
